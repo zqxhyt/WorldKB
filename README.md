@@ -1,125 +1,65 @@
 # WorldKB
 
-WorldKB is a PocketMine-MP API 5 plugin that provides configurable custom knockback settings per world.  
-It includes a clean KnockbackAPI architecture and an in-game Form UI editor for easy configuration.
+WorldKB is a PocketMine-MP API 5 plugin that provides per-world custom knockback controls for PvP.
 
-Author: zqxhyt  
-API: 5.0.0  
-Version: 1.0.0  
+## Features
 
----
+- Per-world knockback settings (`enabled`, `horizontal`, `vertical`)
+- Custom knockback application when a player damages another player
+- `/kbedit` form UI for editing current world knockback values
+- `/kbinfo` command to view the current world's knockback values
+- `/kbreload` command to reload `config.yml` without restarting the server
 
-## ✨ Features
+## Requirements
 
-- Per-world knockback settings
-- Custom horizontal and vertical multipliers
-- Enable/disable knockback per world
-- In-game Form UI editor
-- Clean modular KnockbackAPI system
-- Lightweight and optimized
-- Config auto-generation
-- Runtime reload support
+- PocketMine-MP 5.x
+- PHP 8.1+
+- Optional but recommended: [FormAPI](https://github.com/jojoe77777/FormAPI) for `/kbedit`
 
----
+## Installation
 
-## 📦 Installation
+1. Put this repository folder into your PocketMine-MP `plugins/` directory (or build and copy as needed).
+2. Ensure the folder name is `WorldKB`.
+3. Start or restart the server.
+4. (Optional) Install and enable FormAPI to use `/kbedit`.
 
-1. Download or compile the plugin.
-2. Place the `WorldKB` folder or compiled `.phar` file into your server's `plugins/` directory.
-3. Restart the server.
-4. The plugin will automatically generate `config.yml`.
+## Commands
 
----
+- `/kbedit` - Open the knockback editor form for your current world.
+- `/kbinfo` - Show current world knockback settings.
+- `/kbreload` - Reload configuration from disk.
 
-## ⚙️ Configuration
+## Permissions
+
+- `worldkb.edit` (default: op)
+- `worldkb.info` (default: true)
+- `worldkb.reload` (default: op)
+
+## Configuration
 
 Default `config.yml`:
 
 ```yaml
+default:
+  enabled: true
+  horizontal: 0.4
+  vertical: 0.4
 worlds:
   world:
     enabled: true
     horizontal: 0.4
     vertical: 0.4
+```
 
-Configuration Fields
-Field	Type	Description
-enabled	bool	Enables custom knockback in this world
-horizontal	float	Horizontal knockback multiplier
-vertical	float	Vertical knockback multiplier
-🖥 Commands
-Command	Description	Permission
-/kbedit	Opens knockback editor for current world	worldkb.edit
-/kbinfo	Displays current world knockback settings	worldkb.info
-/kbreload	Reloads configuration file	worldkb.reload
-🔐 Permissions
+Each world can define:
 
-worldkb.edit:
-  default: op
+- `enabled` (bool)
+- `horizontal` (float)
+- `vertical` (float)
 
-worldkb.info:
-  default: true
+## Development Helpers
 
-worldkb.reload:
-  default: op
+Use the provided `Makefile`:
 
-🧠 Architecture
-
-WorldKB uses a modular structure:
-
-src/zqxhyt/worldkb/
- ├── WorldKB.php
- ├── api/KnockbackAPI.php
- ├── listener/KnockbackListener.php
- ├── ui/KnockbackForm.php
- └── command/
-
-KnockbackAPI Responsibilities
-
-    Manage world knockback settings
-
-    Load & save config
-
-    Provide world configuration access
-
-    Apply custom knockback physics
-
-This separation allows easy expansion for:
-
-    Multiple knockback profiles
-
-    Air/ground modifiers
-
-    Sprint reset detection
-
-    Combo scaling
-
-    PvP practice modes
-
-📈 Future Improvements (Optional)
-
-    Per-kit knockback profiles
-
-    Area-based knockback zones
-
-    Advanced friction control
-
-    Sprint reset multipliers
-
-    Knockback presets (Sumo, Combo, Nodebuff)
-
-    Performance profiling tools
-
-🛠 Compatibility
-
-    PocketMine-MP API 5.x
-
-    Tested on latest stable PMMP release
-
-📜 License
-
-This project is open-source.
-You may modify and redistribute it with proper credit.
-💬 Support
-
-For issues or feature requests, open a GitHub issue.
+- `make lint` - Syntax-check all PHP files.
+- `make tree` - Show project file tree.
