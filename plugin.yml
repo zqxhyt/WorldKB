@@ -1,0 +1,30 @@
+name: WorldKB
+main: zqxhyt\worldkb\WorldKB
+version: 1.0.0
+api: 5.0.0
+author: zqxhyt
+
+commands:
+  kbedit:
+    description: Edit knockback settings for your current world.
+    usage: /kbedit
+    permission: worldkb.edit
+  kbinfo:
+    description: View knockback settings for your current world.
+    usage: /kbinfo
+    permission: worldkb.info
+  kbreload:
+    description: Reload WorldKB configuration.
+    usage: /kbreload
+    permission: worldkb.reload
+
+permissions:
+  worldkb.edit:
+    description: Allows editing world knockback settings via form.
+    default: op
+  worldkb.info:
+    description: Allows checking world knockback settings.
+    default: true
+  worldkb.reload:
+    description: Allows reloading WorldKB configuration.
+    default: op
